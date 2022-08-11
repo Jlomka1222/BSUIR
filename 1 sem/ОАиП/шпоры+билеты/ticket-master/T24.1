@@ -1,0 +1,52 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+void sort(int** ms, int n, int temp, int k, int i)
+{
+
+	if (i != (n / 2))
+	{
+		temp = ms[n - k][i];
+		ms[n - k][i] = ms[i][n - k];
+		ms[i][n - k] = temp;
+		k++;
+		i++;
+		sort(ms, n, temp, k, i);
+	}
+}
+
+int main()
+{
+	int n;
+	int** ms;
+	int temp = 0;
+	int k = 1;
+	int i = 0;
+
+	scanf("%d", &n);
+
+	ms = (int**)calloc(n, sizeof(int*));
+	for (int i = 0; i < n; i++)
+	{
+		ms[i] = (int*)calloc(n, sizeof(int));
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			scanf("%d", &ms[i][j]);
+		}
+	}
+
+	sort(ms, n, temp, k ,i);
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			printf("%5d", ms[i][j]);
+		}
+		printf("\n");
+	}
+}

@@ -1,0 +1,46 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+void NOD(int a, int b) 
+{
+    if (a < 0 || b < 0)
+    {
+        printf("Can not find this shit.\n");
+        return;
+    }
+    if (a != b)
+    {
+        if (a > b)
+            a = a - b;
+        else
+            b = b - a;
+        NOD(a, b);
+    }
+    else printf("NOD is %d\n", a);
+ 
+}
+int main () 
+{
+ 
+    int x = 1;
+    while (x == 1)
+    {
+        long int a, b;
+        printf("Enter first number : ");
+        scanf("%d", &a);
+        printf("Enter second number : ");
+        scanf("%d", &b);
+        NOD(a, b);
+        printf("If you want to continue, press 0.\n");
+        printf("If you want to exit, press 1 : ");
+        int k;
+        scanf("%d", &k);
+        if (k != 0)
+        {
+            break;
+        }
+        system("cls");
+    }
+    system("cls");
+	return 0;
+}

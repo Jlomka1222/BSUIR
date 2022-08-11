@@ -1,0 +1,48 @@
+#include <stdio.h>
+int length(char* string);
+void SortStrings(int argc, char** argv);
+int main(int argc, char** argv)
+{
+    printf("Previous string: \n");
+    for (int i = 1; i < argc; i++)
+    {
+        printf("%s\n", argv[i]);
+    }
+    SortStrings(argc, argv);
+    printf("\n");
+    printf("finish strings: \n");
+    for (int i = 1; i < argc; i++)
+    {
+        printf("%s\n", argv[i]);
+    }
+    printf("\n");
+    return 0;
+}
+int Length(char* string)
+{
+    int i = 0, lengthWord = 0;
+    while (string[i] != '\0' && string[i] != '\n')
+    {
+        i++;
+        lengthWord++;
+    }
+    lengthWord--;
+    return lengthWord;
+}
+void SortStrings(int argc, char** argv)
+{
+    int k = 0;
+    char* temp = NULL;
+    int tempIndex = 0;
+    for (int i = 2; i < argc; i++)
+    {
+        k = i - 1;
+        temp = argv[i];
+        while (k >= 1 && Length(temp) < Length(argv[k]))
+        {
+            argv[k + 1] = argv[k];
+            k--;
+        }
+        argv[k + 1] = temp;
+    }
+}

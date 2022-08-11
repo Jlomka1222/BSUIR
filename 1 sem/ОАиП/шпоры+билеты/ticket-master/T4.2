@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<stdlib.h>
+void revers (char*, int, int);
+int main () {
+
+    char* string;
+    int size;
+    int i = 0;
+    int firstSimbolFirstWord, endSimbolFirstWord, firstSimbolEndWord, endSimbolEndWord;
+
+    printf("Enter size\n");
+    scanf("%d", &size);
+
+    string = (char*)malloc((size + 1) * sizeof(char));
+
+    printf("Enter string\n");
+    rewind(stdin);
+    fgets(string, size, stdin);
+    printf("Your string\n");
+    puts(string);
+
+    while (string[i] == ' ') {
+        i++;
+    }
+    firstSimbolFirstWord = i;
+    while (string[i] != ' ' && string[i] != '\0') {
+        i++;
+    }
+    endSimbolFirstWord = i - 1;
+    while (string[i]) {
+        i++;
+    }
+    endSimbolEndWord = i - 1;
+    while (string[i]!= ' ' && string[i] != -1) {
+        i--;
+    }
+    firstSimbolEndWord = i + 1;
+
+    revers (string, firstSimbolFirstWord, endSimbolEndWord);
+    revers(string, firstSimbolFirstWord , firstSimbolFirstWord + (endSimbolEndWord - firstSimbolEndWord));
+    revers(string, endSimbolEndWord - (endSimbolFirstWord - firstSimbolFirstWord), endSimbolEndWord);
+    revers(string, (firstSimbolFirstWord + (endSimbolEndWord - firstSimbolEndWord)) + 1, (endSimbolEndWord - (endSimbolFirstWord - firstSimbolFirstWord)) - 1);
+    puts(string);
+    return 0;
+}
+void revers (char* string, int firstSimbol, int endSimbol) {
+    char c;
+    for ( ; firstSimbol < endSimbol; firstSimbol++, endSimbol--) {
+        c = string[firstSimbol];
+        string[firstSimbol] = string[endSimbol];
+        string[endSimbol] = c;
+    }
+}

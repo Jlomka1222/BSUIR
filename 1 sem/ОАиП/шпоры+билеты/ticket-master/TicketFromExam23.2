@@ -1,0 +1,65 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+void convertCharStringToInt(char* string);
+int main()
+{
+    int n;
+    char* string;
+    printf("Enter a number of elements: \n");
+    scanf_s("%d", &n);
+    if (!(string = (char*)calloc(n + 1, sizeof(char))))
+    {
+        return -1;
+    }
+
+    rewind(stdin);
+    printf("Enter a string: \n");
+    fgets(string, n + 1, stdin);
+
+    puts(string);
+
+    printf("\n");
+
+    convertCharStringToInt(string);
+
+    free(string);
+    return 0;
+}
+void convertCharStringToInt(char* string)
+{
+    int i = 0, znak = 1, j = 0, number;
+    int* array = (int*)malloc(sizeof(int));
+    while (string[i] != '\0' && string[i] != '\n')
+    {
+        if (string[i] == '-')
+        {
+            znak = -1;
+            i++;
+        }
+        if (string[i] == ' ')
+        {
+            i++;
+        }
+        if (string[i] >= '0' && string[i] <= '9')
+        {
+            array = (int*)realloc(array, (j + 2) * sizeof(int));
+
+            for (number = 0; string[i] >= '0' && string[i] <= '9'; i++)
+            {
+                number = 10 * number + (string[i] - '0');
+            }
+            *(array + j) = number*znak;
+            j++;
+            znak = 1;
+
+        }
+    }
+    array = (int*)realloc(array, j * sizeof(int));
+
+    printf("Numbers: %d\n", j);
+    for (int i = 0; i < j; i++)
+    {
+        printf("%5d ", array[i]);
+    }
+}

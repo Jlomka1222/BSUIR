@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<locale.h>
+
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+    printf("Введите количество матриц: ");
+    int n1;
+    scanf("%d", &n1);
+    int*** a;
+    int n;
+    printf("Введите размерность матриц: ");
+    scanf("%d", &n);
+    a = (int***)calloc(n1, sizeof(int**));
+
+    for (int i = 0; i < n1; i++)
+    {
+        a[i] = (int**)calloc(n, sizeof(int*));
+        for (int j = 0; j < n; j++)
+        {
+            a[i][j] = (int*)calloc(n, sizeof(int));
+        }
+    }
+    for (int i = 0; i < n1; i++)
+    {
+        printf("Введите матрицу %d : \n", i + 1);
+        for (int j = 0; j < n; j++)
+        {
+            for (int k = 0; k < n; k++)
+            {
+                scanf("%4d", &a[i][j][k]);
+
+            }
+        }
+
+    }
+
+    for (int i = 0; i < n1; i++)
+    {
+
+            for (int j = 0; j < n; j++)
+            {
+
+                for (int k = 0; k < n; k++)
+
+                {
+
+                    printf("%4d", a[i][j][k]);
+                }
+                printf("\n");
+            }
+            printf("\n\n");
+    }
+    for(int k=0 ; k<n1 ; k++)
+    {
+        int i=0 ,j=0  ;
+        while(j!= n-1)
+        {
+            int J =j , I=i ;
+
+            while(J!=n-1)
+            {
+                int x ;
+                x = a[k][i][J+1];
+                a[k][i][J+1]=a[k][I+1][j];
+                a[k][I+1][j]=x;
+                I++;
+                J++;
+            }
+            i++;
+            j++;
+        }
+    }
+
+    for (int i = 0; i < n1; i++)
+    {
+
+        for (int j = 0; j < n; j++)
+        {
+
+            for (int k = 0; k < n; k++)
+
+            {
+
+                printf("%4d", a[i][j][k]);
+            }
+            printf("\n");
+        }
+        printf("\n\n");
+    }
+
+
+
+
+    return 0;
+}
